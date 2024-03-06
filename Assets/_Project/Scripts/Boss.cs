@@ -7,12 +7,15 @@ namespace Shmup {
     public class Boss : MonoBehaviour {
 
         [SerializeField] float maxHealth = 100f;
+        [SerializeField] GameObject explosionPrefab;
         float health;
 
         Collider bossCollider;
 
         public List<BossStage> Stages;
         int currentStage = 0;
+
+        public event Action OnHealthChange;
 
         private void Awake() {
             bossCollider = GetComponent<Collider>();
@@ -21,10 +24,6 @@ namespace Shmup {
         private void Start() {
             health = maxHealth;
             bossCollider.enabled = true;
-
-            foreach (var system in Stages.SelectMany(stage => stage.enemySystems)) {
-                system.OnSystemDestroyed.AddListener(CheckStageComplete);
-            }
 
             InitializeStage();
         }
@@ -48,11 +47,17 @@ namespace Shmup {
 
         private void InitializeStage() {
             Stages[currentStage].InitializeStage();
+
+            foreach (var system in Stages.SelectMany(stage => stage.enemySystems)) {
+                system.OnSystemDestroyed.AddListener(CheckStageComplete);
+            }
+
             bossCollider.enabled = !Stages[currentStage].IsBossInvulnerable;
         }
 
         private void OnCollisionEnter(Collision collision) {
             health -= 10f;
+            OnHealthChange?.Invoke();
 
             if (health <= 0) {
                 BossDefeated();
@@ -60,7 +65,7 @@ namespace Shmup {
         }
 
         private void BossDefeated() {
-
+            Instantiate(explosionPrefab, transform.position, Quaternion.identity);
         }
     }
 }

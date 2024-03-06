@@ -10,8 +10,14 @@ namespace Shmup {
         [SerializeField] float spawnInterval = 3f;
         [SerializeField] float spawnRadius = 3f;
 
+        CoroutineHandle spawnCoroutine;
+
         private void Start() {
-            Timing.RunCoroutine(SpawnItems());
+            spawnCoroutine = Timing.RunCoroutine(SpawnItems());
+        }
+
+        private void OnDestroy() {
+            Timing.KillCoroutines(spawnCoroutine);
         }
 
         private IEnumerator<float> SpawnItems() {

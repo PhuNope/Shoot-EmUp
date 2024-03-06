@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 7337785232736152083}
   - component: {fileID: 37515740222850197}
   - component: {fileID: 4361442861786732637}
-  - component: {fileID: 7684460989226590591}
-  - component: {fileID: 2558793507642880886}
+  - component: {fileID: 930392630290905775}
+  - component: {fileID: 809749592989207476}
   m_Layer: 7
-  m_Name: BossGun
+  m_Name: BossRockets
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -50,8 +50,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 50
-  explosionPrefab: {fileID: 1134129239631916, guid: 7e48ba6b1b968764490bbc70b66e3fe1,
-    type: 3}
   OnSystemDestroyed:
     m_PersistentCalls:
       m_Calls: []
@@ -67,10 +65,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6ca235cd762e24448fb27217b599d9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponStrategy: {fileID: 11400000, guid: ec5c793f2892e1a40aef3b7ae4ee8a65, type: 2}
+  weaponStrategy: {fileID: 11400000, guid: cea6d75ac328ade4b9d7badb8777fa26, type: 2}
   firePoint: {fileID: 5171217307591420059}
   layer: 7
---- !u!135 &7684460989226590591
+--- !u!135 &930392630290905775
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -91,7 +89,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &2558793507642880886
+--- !u!54 &809749592989207476
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
